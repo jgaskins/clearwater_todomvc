@@ -13,7 +13,12 @@ class Layout
     div(nil, [
       header({ id: 'header' }, [
         h1(nil, 'todos'),
-        input(id: 'new-todo', placeholder: 'What needs to be done?', onkeydown: method(:handle_new_todo_key_down), autofocus: true),
+        input(
+          id: 'new-todo',
+          placeholder: 'What needs to be done?',
+          onkeydown: method(:handle_new_todo_key_down),
+          autofocus: true
+        ),
       ]),
 
       (outlet || todo_list),
