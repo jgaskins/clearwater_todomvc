@@ -15,7 +15,7 @@ class TodoList
         id: 'toggle-all',
         type: 'checkbox',
         onchange: method(:toggle_all),
-        checked: todos.none?(&:active?)
+        checked: todos.all?(&:completed?)
       ),
       ul({ id: 'todo-list' }, todo_items),
     ])
