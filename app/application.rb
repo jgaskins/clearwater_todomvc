@@ -158,7 +158,7 @@ class TodoItem
   def render
     li({ key: key, class_name: todo_class }, [
       if editing?
-        input(class_name: 'edit', default_value: todo.name, onkeydown: method(:handle_edit_key_down))
+        input(class_name: 'edit', default_value: todo.name, onkeydown: method(:handle_edit_key_down), autofocus: true)
       else
         div({ class_name: 'view' }, [
           input(class_name: 'toggle', type: 'checkbox', checked: todo.completed?, onchange: method(:toggle_todo)),
