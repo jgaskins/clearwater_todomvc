@@ -26,4 +26,9 @@ class TodoRepository
     todos << todo
     save!
   end
+
+  def delete todo
+    todos.delete todo
+    save!
+  end
 end
