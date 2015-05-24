@@ -1,18 +1,6 @@
 require 'clearwater/application'
 require 'json'
 
-module Browser
-  module DOM
-    class Element
-      class Input
-        def checked?
-          `#@native.checked`
-        end
-      end
-    end
-  end
-end
-
 class Layout
   include Clearwater::Component
 
