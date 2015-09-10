@@ -20,7 +20,7 @@ TodoList = Struct.new(:store) do
   end
 
   def toggle_all event
-    store.dispatch Actions::ToggleAllTodos.new
+    store.dispatch Actions::ToggleAllTodos.new event.target.checked?
   end
 
   def todo_items

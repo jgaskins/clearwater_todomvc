@@ -25,9 +25,7 @@ class Todo
   end
 
   def toggled completed=!completed?
-    toggled = dup
-    toggled.toggle!
-    toggled
+    update completed: completed
   end
 
   def toggle! value=!completed?
