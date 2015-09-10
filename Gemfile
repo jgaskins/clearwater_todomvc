@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
 
-ruby '2.2.1'
+ruby '2.2.3'
 
 gem 'clearwater', github: 'clearwater-rb/clearwater'
-gem 'opal-browser', github: 'opal/opal-browser'
-
-gem 'sinatra'
+gem 'opal', path: '../opal'
+gem 'grand_central'
+gem 'roda'

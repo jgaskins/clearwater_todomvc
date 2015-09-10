@@ -3,8 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>Clearwater TodoMVC</title>
-    <link rel="stylesheet" media="all" href="/style.css">
-    <script src="/assets/application.js" async defer></script>
+    <%= assets(:css) %>
   </head>
   <body>
     <div id="todoapp"></div>
@@ -12,5 +11,6 @@
       <p>Double-click to edit a todo</p>
       <p>Created by <a href="http://github.com/jgaskins">Jamie Gaskins</a></p>
     </footer>
+    <%= assets(:js) %>
   </body>
 </html>

@@ -1,49 +1,46 @@
 GIT
   remote: git://github.com/clearwater-rb/clearwater.git
-  revision: ec1df850b31e203cd1a251b19c81bfb70ade41de
+  revision: f5bde1fdc584d3ea9d9ad653e998073f91118ed4
   specs:
-    clearwater (0.0.1)
-      opal (~> 0.7.0)
+    clearwater (0.1.2)
+      opal (~> 0.7)
       opal-browser
 
-GIT
-  remote: git://github.com/opal/opal-browser.git
-  revision: 02a913f7cf416b39608fbafb216cfe2aeee39afd
+PATH
+  remote: ../opal
   specs:
-    opal-browser (0.2.0.beta1)
-      opal
-      paggio
+    opal (0.8.0)
+      hike (~> 1.2)
+      sourcemap (~> 0.1.0)
+      sprockets (~> 3.1)
+      tilt (>= 1.4)
 
 GEM
   remote: https://rubygems.org/
   specs:
+    grand_central (0.1.1)
+      opal (~> 0.8)
     hike (1.2.3)
-    multi_json (1.11.0)
-    opal (0.7.2)
-      hike (~> 1.2)
-      sourcemap (~> 0.1.0)
-      sprockets (>= 2.2.3, < 3.0.0)
-      tilt (~> 1.4)
+    opal-browser (0.2.0)
+      opal
+      paggio
     paggio (0.2.4)
-    rack (1.6.1)
-    rack-protection (1.5.3)
+    rack (1.6.4)
+    roda (2.5.1)
       rack
-    sinatra (1.4.6)
-      rack (~> 1.4)
-      rack-protection (~> 1.4)
-      tilt (>= 1.3, < 3)
     sourcemap (0.1.1)
-    sprockets (2.12.3)
-      hike (~> 1.2)
-      multi_json (~> 1.0)
+    sprockets (3.3.4)
       rack (~> 1.0)
-      tilt (~> 1.1, != 1.3.0)
-    tilt (1.4.1)
+    tilt (2.0.1)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   clearwater!
-  opal-browser!
-  sinatra
+  grand_central
+  opal!
+  roda
+
+BUNDLED WITH
+   1.10.6

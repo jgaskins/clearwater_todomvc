@@ -5,8 +5,16 @@ class TodoRepository
 
   attr_reader :todos
 
+  def initialize todos=load_from_storage
+    @todos = todos
+  end
+
   def load!
-    @todos = TodosSerializer.from_json(`localStorage.todos || '[]'`).todos
+    @todos = load_from_storage
+  end
+
+  def load_from_storage
+    TodosSerializer.from_json(`localStorage.todos || '[]'`).todos
   end
 
   def save!

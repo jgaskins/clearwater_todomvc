@@ -1,13 +1,7 @@
 require 'components/todo_list'
 
-class Layout
+Layout = Struct.new(:store) do
   include Clearwater::Component
-
-  attr_reader :todo_repo
-
-  def initialize todo_repo=[]
-    @todo_repo = todo_repo
-  end
 
   def render
     div(nil, [
@@ -28,12 +22,11 @@ class Layout
   end
 
   def todo_list
-    @todo_list ||= TodoList.new(todo_repo)
+    @todo_list ||= TodoList.new(store)
   end
 
   def add_todo name
-    todo_repo << Todo.new(name)
-    call
+    store.dispatch Actions::AddTodo.new(Todo.new(name))
   end
 
   def handle_new_todo_key_down event
@@ -47,7 +40,7 @@ class Layout
   end
 
   def footer
-    active_count = todo_repo.count(&:active?)
+    active_count = store.state[:todos].count(&:active?)
 
     tag('footer#footer', nil, [
       span({ id: 'todo-count' }, [
@@ -55,9 +48,9 @@ class Layout
         " todo#{'s' unless active_count == 1} left"
       ]),
       ul({ id: 'filters' }, [
-        li(nil, Link.new({ href: '/' }, 'All')),
-        li(nil, Link.new({ href: '/active' }, 'Active')),
-        li(nil, Link.new({ href: '/completed' }, 'Completed')),
+        li(Link.new({ href: '/' }, 'All')),
+        li(Link.new({ href: '/active' }, 'Active')),
+        li(Link.new({ href: '/completed' }, 'Completed')),
       ]),
       clear_button
     ])
@@ -68,7 +61,6 @@ class Layout
   end
 
   def clear_completed
-    todo_repo.reject!(&:completed?)
-    call
+    store.dispatch Actions::ClearCompletedTodos.new
   end
 end
