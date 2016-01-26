@@ -1,3 +1,9 @@
+require 'bundler'
+Bundler.require
+require 'tilt/erb'
+
+Opal.append_path File.expand_path('../assets/js', __FILE__)
+
 class TodoMVC < Roda
   plugin :render
   plugin :assets,

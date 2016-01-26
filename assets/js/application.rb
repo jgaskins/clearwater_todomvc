@@ -18,7 +18,7 @@ end
 App = Clearwater::Application.new(
   component: Layout.new(Store),
   router: router,
-  element: $document['#todoapp']
+  element: Bowser.document['#todoapp']
 )
 
 Store.on_dispatch do |old, new|
