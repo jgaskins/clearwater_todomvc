@@ -2,6 +2,7 @@ initial_state = {
   todos: TodoRepository.new.load!,
   editing_todos: Set.new,
 }
+
 Store = GrandCentral::Store.new(initial_state) do |state, action|
   case action
   when Actions::AddTodo

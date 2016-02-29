@@ -1,6 +1,6 @@
 require 'components/todo_list'
 
-Layout = Struct.new(:store) do
+class Layout
   include Clearwater::Component
 
   def render
@@ -22,11 +22,14 @@ Layout = Struct.new(:store) do
   end
 
   def todo_list
-    @todo_list ||= TodoList.new(store)
+    TodoList.new(
+      Store.state[:todos],
+      Store.state[:editing_todos]
+    )
   end
 
   def add_todo name
-    store.dispatch Actions::AddTodo.new(Todo.new(name))
+    Store.dispatch Actions::AddTodo.new(Todo.new(name))
   end
 
   def handle_new_todo_key_down event
@@ -40,7 +43,7 @@ Layout = Struct.new(:store) do
   end
 
   def footer
-    active_count = store.state[:todos].count(&:active?)
+    active_count = Store.state[:todos].count(&:active?)
 
     tag('footer#footer', nil, [
       span({ id: 'todo-count' }, [
@@ -61,6 +64,6 @@ Layout = Struct.new(:store) do
   end
 
   def clear_completed
-    store.dispatch Actions::ClearCompletedTodos.new
+    Store.dispatch Actions::ClearCompletedTodos.new
   end
 end

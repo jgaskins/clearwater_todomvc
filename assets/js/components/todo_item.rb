@@ -1,8 +1,23 @@
-TodoItem = Struct.new(:todo, :store) do
+class TodoItem
   include Clearwater::Component
+  include Clearwater::CachedRender
+
+  attr_reader :todo
+
+  def initialize todo, editing
+    @todo = todo
+    @editing = editing
+  end
+
+  def should_render? previous
+    !(
+      todo.equal?(previous.todo) &&
+      editing? == previous.editing?
+    )
+  end
 
   def render
-    li({ key: key, class_name: todo_class }, [
+    div([
       if editing?
         input(
           class_name: 'edit',
@@ -25,41 +40,30 @@ TodoItem = Struct.new(:todo, :store) do
     ])
   end
 
-  def todo_class
-    [
-      ('completed' if todo.completed?),
-      ('editing' if editing?),
-    ].compact.join(' ')
-  end
-
-  def key
-    todo.id
-  end
-
   def toggle_todo
-    store.dispatch Actions::ToggleTodo.new(todo)
+    Store.dispatch Actions::ToggleTodo.new(todo)
   end
 
   def edit_todo
-    store.dispatch Actions::EditTodo.new(todo)
+    Store.dispatch Actions::EditTodo.new(todo)
   end
 
   def editing?
-    store.state[:editing_todos].include?(todo)
+    @editing
   end
 
   def done_editing!
-    store.dispatch Actions::DoneEditingTodo.new(todo)
+    Store.dispatch Actions::DoneEditingTodo.new(todo)
   end
 
   def delete_todo
-    store.dispatch Actions::DeleteTodo.new(todo)
+    Store.dispatch Actions::DeleteTodo.new(todo)
   end
 
   def handle_edit_key_down event
     case event.code
     when 13 # Enter
-      store.dispatch Actions::RenameTodo.new(todo, event.target.value)
+      Store.dispatch Actions::RenameTodo.new(todo, event.target.value)
       done_editing!
     when 27 # Esc
       done_editing!
